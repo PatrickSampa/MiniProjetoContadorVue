@@ -5,7 +5,7 @@
                 <input type="text" class="input" v-model="descricao" placeholder="Qual tarefa você deseja iniciar?">
             </div>
             <div class="column">
-               <Cronometro/> 
+               <CronometroVue :tempoEmSegundos="tempoEmSegundos"/> 
                 <button class="button" @click="iniciar" :disabled="cronometroRodando">
                     <span class="icon">
                         <i class="fas fa-play"></i>
@@ -25,12 +25,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import Cronometro from './Cronometro.vue';
+import CronometroVue from './CronometroVue.vue';
 
 export default defineComponent({
     name: 'FormularioVue',
     components:{
-        Cronometro,
+        CronometroVue,
     },
     emits: ['aoTemporizadorFinalizado'],
     //ESTADO INICIAL
