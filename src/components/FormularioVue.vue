@@ -32,7 +32,7 @@ export default defineComponent({
     components:{
         CronometroVue,
     },
-    emits: ['aoTemporizadorFinalizado'],
+    emits: ['aoSalvarTarefa'],
     //ESTADO INICIAL
     data(){
         return {
@@ -54,11 +54,10 @@ export default defineComponent({
         finalizar(){
             this.cronometroRodando = false;
             clearInterval(this.cronometro)
-            console.log("tempoAposFinalizar: " + this.tempoEmSegundos);
-            console.log("FINALIZANDO")
-            this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos);
-            console.log("TempoDecorrido: " + this.tempoEmSegundos)
-            console.log("Descricao: " + this.descricao)
+            this.$emit('aoSalvarTarefa', {
+                duracaoEmSegundos: this.tempoEmSegundos,
+                descricao: this.descricao
+            })
             this.descricao = '';
             this.tempoEmSegundos = 0;
         }

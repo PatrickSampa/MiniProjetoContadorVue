@@ -4,10 +4,10 @@
 
     <div class="columns">
         <div class="column is-7">
-            Descricao da tarefa
+            {{tarefa.descricao}}
         </div>
         <div class="column">
-            {{tempoDecorrido}}
+            <CronometroVue :tempoEmSegundos="tarefa.tempoEmSegundos"/> 
         </div>
     </div>
 </div>
@@ -16,19 +16,20 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { defineComponent } from 'vue';
+import CronometroVue from './CronometroVue.vue';
+import('vue').PropType
 
 export default defineComponent({
     name: 'tarefaProjeto',
-    props:{
-        tempoEmSegundos: {
-            type: Number,
-            default: 0,
-        }
+    components:{
+        CronometroVue,
     },
-    computed:{
-        tempoDecorrido(){
-            return new Date(this.tempoEmSegundos).toISOString().substr(11,8)
+    props:{
+        tarefa:{
+            type: Object,
+            required:true
         }
     }
 })
@@ -36,3 +37,11 @@ export default defineComponent({
 
 
 </script>
+
+
+<style scoped>
+.box{
+    background: #FAF0CA;
+}
+
+</style>
