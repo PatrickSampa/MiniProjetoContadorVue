@@ -2,12 +2,10 @@
     <div class="box">
         <div class="column">
             <div class="column is-8" role="form" arial-label="formulario para criacao de uma nova tarefa">
-                <input type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
+                <input type="text" class="input" v-model="descricao" placeholder="Qual tarefa você deseja iniciar?">
             </div>
             <div class="column">
-                <section>
-                    <strong>{{ tempoDecorrido }}</strong>
-                </section>
+               <Cronometro/> 
                 <button class="button" @click="iniciar" :disabled="cronometroRodando">
                     <span class="icon">
                         <i class="fas fa-play"></i>
@@ -27,20 +25,21 @@
 
 <script>
 import { defineComponent } from 'vue';
+import Cronometro from './Cronometro.vue';
 
 export default defineComponent({
     name: 'FormularioVue',
+    components:{
+        Cronometro,
+    },
+    emits: ['aoTemporizadorFinalizado'],
     //ESTADO INICIAL
     data(){
         return {
             tempoEmSegundos: 0,
             cronometro: 0,
             cronometroRodando: false,  
-        }
-    },
-    computed: {
-        tempoDecorrido(){
-            return new Date(this.tempoEmSegundos * 1000 ).toISOString().substr(11,8)
+            descricao : "",
         }
     },
     methods: {
@@ -57,6 +56,11 @@ export default defineComponent({
             clearInterval(this.cronometro)
             console.log("tempoAposFinalizar: " + this.tempoEmSegundos);
             console.log("FINALIZANDO")
+            this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos);
+            console.log("TempoDecorrido: " + this.tempoEmSegundos)
+            console.log("Descricao: " + this.descricao)
+            this.descricao = '';
+            this.tempoEmSegundos = 0;
         }
     }
 })
