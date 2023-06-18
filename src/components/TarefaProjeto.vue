@@ -7,7 +7,7 @@
             {{tarefa.descricao}}
         </div>
         <div class="column">
-            <CronometroVue :tempoEmSegundos="tarefa.tempoEmSegundos"/> 
+            <CronometroVue :tempoEmSegundos="tarefa.duracaoEmSegundos"/> 
         </div>
     </div>
 </div>
